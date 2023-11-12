@@ -24,6 +24,7 @@ int adds(int num, ...) {
 int main(int argc, char **argv)
 {
     printf("sum = %d\n", adds(5,32,4242,15,667,2));
+    printf("sum = %d\n", adds(3,15,667,2));
 
     return 0;
 }

@@ -1,19 +1,18 @@
 #include "stdio.h"
+#include "IPD.h"
 
-typedef unsigned int uint32;
-typedef unsigned long uint64;
 
 #define PI 3.14
 
 
 struct Person {
-    uint32 age;
-    uint32 no;
+    u32 age;
+    u32 no;
 };
 typedef struct Person* Person;
 
-void show_person_group(Person *arr, int num) {
-    int i = 0;
+void show_person_group(Person *arr, u32 num) {
+    u32 i = 0;
     for (i = 0; i < num; i++)
     {
         printf("%u\r\n", arr[i]->no);
@@ -25,7 +24,7 @@ const int P = 3.14;
 #define INC(x) ((x) + 1)
 #define ADD_STR(x)  "1_"#x
 
-const unsigned char __lowest_bit_bitmap[] =
+const u8 __lowest_bit_bitmap[] =
 {
     /*  0 - 7  */  0,  1,  2, 27,  3, 24, 28, 32,
     /*  8 - 15 */  4, 17, 25, 31, 29, 12, 32, 14,
@@ -34,12 +33,12 @@ const unsigned char __lowest_bit_bitmap[] =
     /* 32 - 36 */  6, 21,  9, 20, 19
 };
 
-int __rt_ffs(int value)
+i32 __rt_ffs(i32 value)
 {
-    return __lowest_bit_bitmap[(unsigned int)((value & (value - 1)) ^ value) % 37];
+    return __lowest_bit_bitmap[(u32)((value & (value - 1)) ^ value) % 37];
 }
 
-int main(void)
+i32 main(void)
 {
     Person persons[2];
     struct Person p1 = {22, 0};
@@ -57,15 +56,14 @@ int main(void)
     ptr1 = &arr1;
     printf("%u %u\r\n", sizeof arr1/sizeof(void*), sizeof ptr1);
 
-    int iarr1[4] = {11, 12, 13, 14};
-    int iarr2[5] = {21, 22, 23, 24, 25};
-    int *iarr_ptr = 0U;
+    i32 iarr1[4] = {11, 12, 13, 14};
+    i32 iarr2[5] = {21, 22, 23, 24, 25};
+    i32 *iarr_ptr = 0U;
 
     iarr_ptr = iarr1;
     printf("%u, %u\r\n", sizeof iarr_ptr, sizeof iarr1);
 
 
-    /* Test */
     struct Person pp1 = {22, 0};
     struct Person pp2 = {50, 1};
     struct Person pp3 = {22, 2};
@@ -83,10 +81,7 @@ int main(void)
     printf("%u, %u\r\n", ((pp_ptr[3]))->no, 2 );
 
     INC(1 + 2);
-    char arr[8] = ADD_STR(1);
+    u8 arr[8] = ADD_STR(1);
 
-    //printf("%s\r\n",arr);
-    unsigned int test11 = 239075328;
-    printf("first: %d \r\n",__rt_ffs(test11));
     return 0;
 }
