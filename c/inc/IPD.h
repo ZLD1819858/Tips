@@ -1,6 +1,5 @@
 #ifndef __IPD_H_
-#define __IPD__
-
+#define __IPD_H_
 
 
 typedef char                i8;
@@ -51,14 +50,38 @@ typedef unsigned long       usize;
 #endif  /* IPD_CALC_ARG_MAX */
 
 
+#define    printf_info(...)    do{\
+                                   printf("\033[0m");/* Reset all attribute */\
+                                   printf("\033[32m[I] ");\
+                                   printf(__VA_ARGS__);\
+                                   printf("\033[0m");\
+                                 } while(0)
+#define    printf_warning(...) do{\
+                                   printf("\033[0m");/* Reset all attribute */\
+                                   printf("\033[33m[W] ");\
+                                   printf(__VA_ARGS__);\
+                                   printf("\033[0m");/* Reset all attribute */\
+                                 } while(0)
+#define    printf_error(...)   do{\
+                                   printf("\033[0m");/* Reset all attribute */\
+                                   printf("\033[31m[E] ");\
+                                   printf(__VA_ARGS__);\
+                                   printf("\033[0m");/* Reset all attribute */\
+                                 } while(0)
+
+
 #define msleep(ms)      usleep(ms*1000)
 
 /* Compiler adaptation */
 #ifdef __GNUC__
-    #define IPD_ALIGN(x)       __attribute__((aligned((x))))
+    #define ATTR_ALIGN(x)       __attribute__((aligned((x))))
 #elif __TASKING__
-    #define IPD_ALIGN(x)       __attribute__((aligned((x))))
+    #define ATTR_ALIGN(x)       __attribute__((aligned((x))))
 #endif /* Compiler adaptation */
+
+#ifdef __GNUC__
+    #define LOCAL_INLINE static inline
+#endif
 
 #define ALIGN_UP(x)                         (((x) + 3) & (~3))
 #define ALIGN_DOWN(x)                       ((x) & (~3))
@@ -80,4 +103,5 @@ typedef unsigned long       usize;
 #define container_of(ptr, type, member) \
     ((type *)((char *)(ptr) - (unsigned long)(&((type *)0)->member)))
 
-#endif /*__IPD__*/
+
+#endif /*__IPD_H_*/

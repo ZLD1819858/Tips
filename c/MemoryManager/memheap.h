@@ -1,9 +1,10 @@
 #ifndef __MEMHEAP_H_
 #define __MEMHEAP_H_
 
-#include "IPD.h"
+#include "../inc/IPD.h"
+#include "../inc/llist.h"
 
-struct object
+struct Object
 {
     char        name[32];                       /**< name of kernel object */
     u8          type;                                    /**< type of kernel object */
@@ -13,20 +14,27 @@ struct object
     int       osa_ref_count;                            /**< ref count for osa */
 #endif
 
-    rt_list_t  list;                                    /**< list node of kernel object */
+    LListNode   list;                                    /**< list node of kernel object */
 };
-typedef struct rt_object *rt_object_t;                  /**< Type for kernel objects. */
+typedef struct Object   Object;                     /**< Type for kernel objects. */
+typedef struct Object   *ObjectRef;                  /**< Type for kernel objects. */
 
-struct rt_memheap_item
+
+typedef struct Memheap Memheap;
+typedef struct Memheap *MemheapRef;
+typedef struct MemheapItem  MemheapItem;
+typedef struct MemheapItem  *MemheapItemRef;
+
+struct MemheapItem
 {
-    u32                     magic;                      /**< magic number for memheap */
-    struct rt_memheap       *pool_ptr;                   /**< point of pool */
+    u32                 magic;                      /**< magic number for memheap */
+    MemheapRef          pool_ptr;                   /**< point of pool */
 
-    struct rt_memheap_item *next;                       /**< next memheap item */
-    struct rt_memheap_item *prev;                       /**< prev memheap item */
+    MemheapItemRef      next;                       /**< next memheap item */
+    MemheapItemRef      prev;                       /**< prev memheap item */
 
-    struct rt_memheap_item *next_free;                  /**< next free memheap item */
-    struct rt_memheap_item *prev_free;                  /**< prev free memheap item */
+    MemheapItemRef      next_free;                  /**< next free memheap item */
+    MemheapItemRef      prev_free;                  /**< prev free memheap item */
 #ifdef RT_USING_MEMTRACE
     u8              owner_thread_name[4];       /**< owner thread name */
 #endif /* RT_USING_MEMTRACE */
@@ -35,20 +43,18 @@ struct rt_memheap_item
 /**
  * Base structure of memory heap object
  */
-struct rt_memheap
+struct Memheap
 {
-    struct object        parent;                     /**< inherit from rt_object */
+    Object              parent;                     /**< inherit from rt_object */
+    void                *start_addr;                 /**< pool start address and size */
 
-    void                    *start_addr;                 /**< pool start address and size */
+    usize               pool_size;                  /**< pool size */
+    usize               available_size;             /**< available size */
+    usize               max_used_size;              /**< maximum allocated size */
 
-    usize                   pool_size;                  /**< pool size */
-    usize                   available_size;             /**< available size */
-    usize                   max_used_size;              /**< maximum allocated size */
-
-    struct rt_memheap_item *block_list;                 /**< used block list */
-
-    struct rt_memheap_item *free_list;                  /**< free block list */
-    struct rt_memheap_item  free_header;                /**< free block list header */
+    MemheapItemRef      block_list;                 /**< used block list */
+    MemheapItemRef      free_list;                  /**< free block list */
+    MemheapItem         free_header;                /**< free block list header */
 };
 
 #endif /* __MEMHEAP_H_ */
