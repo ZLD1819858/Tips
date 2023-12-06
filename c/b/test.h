@@ -1,7 +1,7 @@
-#ifndef __TEST__
-#define __TEST__
+#ifndef __TEST_H__
+#define __TEST_H__
 
-#error "dir "b""
+#error "Directory: b/test.h"
 
-#endif  /*__TEST__ */
+#endif  /*__TEST_H__ */
 

@@ -1,5 +1,6 @@
 //#include "hello.h"
-#include "stdio.h"
+#include <stdio.h>
+#include "string.h"
 #include "IPD.h"
 #include "test.h"
 
@@ -24,14 +25,9 @@ int __attribute__((unavailable)) unavailableFn(void)
 
 int __attribute__((weak))B (void *param);
 
-/*
-int B(void *param){return 0;}
-*/
 
 int main (void)
 {
-    printf("B function addr: %x\r\n", &B);
-    //hello ("world");
     deprecatedFn();
     unavailableFn();
     struct Animal a1 = {"houzi", 11};

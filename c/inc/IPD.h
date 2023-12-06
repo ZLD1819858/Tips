@@ -1,6 +1,7 @@
 #ifndef __IPD_H_
 #define __IPD_H_
 
+#include "stddef.h"
 
 typedef char                i8;
 typedef short int           i16;
@@ -103,5 +104,12 @@ typedef unsigned long       usize;
 #define container_of(ptr, type, member) \
     ((type *)((char *)(ptr) - (unsigned long)(&((type *)0)->member)))
 
+
+static inline void * __cdecl memset(void *_Dst,int _Val, size_t _Size) {
+
+}
+static inline void * __stdcall memset2(void *_Dst,int _Val, size_t _Size) {
+
+}
 
 #endif /*__IPD_H_*/
