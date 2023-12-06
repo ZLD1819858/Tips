@@ -94,6 +94,9 @@ typedef unsigned long       usize;
 #define FALSE                               (0 == 1)
 #define IPD_NULL                                ((void*)0)
 
+#define ON                                  (1)
+#define OFF                                 (0)
+
 #define OFFSET_OF(type, member)           ((unsigned long)(&(((type *)0)->member)))
 #define CONTAINER_OF(ptr, type, member)   ((type *)((char *)(ptr) - Z_OFFSET_OF(type, member)))
 
