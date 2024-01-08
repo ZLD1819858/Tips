@@ -21,6 +21,7 @@ struct Animal {
     int age;
 };
 
+
 int deprecatedFn(void)
 {
     return 0;
@@ -30,7 +31,6 @@ void unavailableFn(void)
 {
     //return 0;
 }
-
 int B (void *param) __attribute__((weak)) ;
 
 
