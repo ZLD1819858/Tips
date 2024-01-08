@@ -108,11 +108,13 @@ typedef unsigned long       usize;
     ((type *)((char *)(ptr) - (unsigned long)(&((type *)0)->member)))
 
 
+/*
 static inline void * __cdecl memset(void *_Dst,int _Val, size_t _Size) {
 
 }
 static inline void * __stdcall memset2(void *_Dst,int _Val, size_t _Size) {
 
 }
+*/
 
 #endif /*__IPD_H_*/
