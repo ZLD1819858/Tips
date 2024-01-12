@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 
 /*
@@ -9,21 +10,18 @@
     -fno-omit-frame-pointer (让栈追溯信息更加友好)
 */
 
-int main(int argc, char **argv) {
-/*
-    int x[5] = {0};
-    x[5] = 10;
-    printf("%d \n", x[5]);
-    printf("%d \n", x[6]);
-*/
 
-    //int *p = NULL;
-    //*p = 0;
+char global_arr[9] = {0};
 
-    char *buffer = (char *)malloc(32);
-    memset(buffer, 1, 32);
+int main(void) {
 
-    free(buffer);
+    
+    char local_arr[15] = {0};
+    int i = 0;
+
+    for(i = 0; i < 20; i++) {
+        global_arr[i] = 3;
+    }
 
     return EXIT_SUCCESS;
 }

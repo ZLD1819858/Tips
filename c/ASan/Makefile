@@ -1,7 +1,7 @@
 # Makefile
 
 CC=gcc
-CFLAGS=-fsanitize=address -g -Wall
+CFLAGS=-fsanitize=null -fsanitize=enum -fsanitize=address -fsanitize=alignment -g -Wall
 TARGET=sanitize
 
 all: $(TARGET)
