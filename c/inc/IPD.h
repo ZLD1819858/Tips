@@ -94,6 +94,17 @@ typedef unsigned long       usize;
 #define FALSE                               (0 == 1)
 #define IPD_NULL                                ((void*)0)
 
+#define max(x, y) ({                \
+    typeof(x) _max1 = (x);          \
+    typeof(y) _max2 = (y);          \
+    (void) (&_max1 == &_max2);   /* This line has no effect on execution, it just uses the compiler to check type consistency. */   \
+    _max1 > _max2 ? _max1 : _max2; })
+#define min(x, y) ({                \
+    typeof(x) _min1 = (x);          \
+    typeof(y) _min2 = (y);          \
+    (void) (&_min1 == &_min2);   /* This line has no effect on execution, it just uses the compiler to check type consistency. */   \
+    _min1 < _min2 ? _min1 : _min2; })
+
 #define ON                                  (1)
 #define OFF                                 (0)
 

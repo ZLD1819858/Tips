@@ -4,35 +4,10 @@
 #include "learn_config.h"
 #include "test.h"
 
-#define RL_BUFFER_COUNT 2
-
-/*
-    检验宏的奇偶性
-*/
-#if (!RL_BUFFER_COUNT) || (RL_BUFFER_COUNT & (RL_BUFFER_COUNT - 1))
-#error "testte"
-#endif
-
-//int __attribute__((deprecated))deprecatedFn(void);
-//void unavailableFn(void) __attribute__((unavailable)) ;
-
 struct Animal {
     char name[8];
     int age;
 };
-
-
-int deprecatedFn(void)
-{
-    return 0;
-}
-
-void unavailableFn(void)
-{
-    //return 0;
-}
-int B (void *param) __attribute__((weak)) ;
-
 
 /*
     这种方法的关键在于理解宏展开的顺序和方式。
@@ -46,7 +21,6 @@ int B (void *param) __attribute__((weak)) ;
 
 int main (void)
 {
-    //printf("B function addr: %x\r\n", &B);
     printf("%s\n", CONCAT_FILE_MACRO(INFO_MACRO));
     printf("%s %s\n", CONCAT_FILE_MACRO("test"), __FUNCTION__);
 
@@ -55,23 +29,6 @@ int main (void)
     } else {
         printf_warning("no, is b\n");
     }
-    //deprecatedFn(); //unavailableFn();
-    struct Animal a1 = {"houzi", 11};
-    strncpy(a1.name, "hei\0heiahglajlgja", 8);
-    printf("%s %d\n", a1.name, a1.age);
 
-    printf("%ld %d\n",sizeof(long), ALIGN_DOWN_AS(1024, 4));
-
-#if defined(LEARN_CONST) && (LEARN_CONST == ON)
-/*
-    const int a1 = 10;
-    const int a2 = 10;
-    int * const b1 = &a1;
-    b1 = &a2;
-    *b1 = 1221UL;
-    printf("const value: %d\n", a1);
-*/
-
-#endif
     return 0;
 }
