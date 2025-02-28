@@ -1,4 +1,5 @@
 #include "stdio.h"
+#include "unistd.h"
 
 // 通过typeof获取类型做强转来实现编译期间检查类型不一致的问题
 #define max(x,y) ({ \
@@ -35,9 +36,9 @@ struct Person2 {
 
 int main(int argc, char **argv) {
 
-    printf("%d %d\n", sizeof(struct Person), sizeof(struct Person2));
+    printf("%ld %ld\n", sizeof(struct Person), sizeof(struct Person2));
     int a = 0;
-    int *b = (int *)a;
+    //int *b = (int *)a;
 
     int x = 0;
     typeof(x) y;
@@ -45,15 +46,16 @@ int main(int argc, char **argv) {
     printf("%d\n", y);
 
     int z = max(11,2);
+    int z2 = max(11,(char)2);
 
     char *p1;
     typeof (*p1) ch = 'a'; //ch为char类型，不是char *类型。
-    printf("%d, %c\n", sizeof(ch), ch);//1, a
+    printf("%ld, %c\n", sizeof(ch), ch);//1, a
 
     //其它用法2
     char *p2;
     typeof (p2) p = "hello world";//此时的p才是char *类型，由于在64位机器上，所以指针大小为8字节
-    printf("%d, %s\n", sizeof(p), p);//8, hello world
+    printf("%ld, %s\n", sizeof(p), p);//8, hello world
 
     while(1) {
         printf("sleep...\n");

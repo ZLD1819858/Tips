@@ -4,6 +4,21 @@
 #include "learn_config.h"
 #include "test.h"
 
+
+const char BuildInfo[] = "Version: "__DATE__" "__TIME__ ;
+
+#define RL_BUFFER_COUNT 2
+
+/*
+    检验宏的奇偶性
+*/
+#if (!RL_BUFFER_COUNT) || (RL_BUFFER_COUNT & (RL_BUFFER_COUNT - 1))
+#error "testte"
+#endif
+
+//int __attribute__((deprecated))deprecatedFn(void);
+//void unavailableFn(void) __attribute__((unavailable)) ;
+
 struct Animal {
     char name[8];
     int age;
@@ -21,6 +36,8 @@ struct Animal {
 
 int main (void)
 {
+    printf_info("BuildInfo: %s\n", BuildInfo);
+    //printf("B function addr: %x\r\n", &B);
     printf("%s\n", CONCAT_FILE_MACRO(INFO_MACRO));
     printf("%s %s\n", CONCAT_FILE_MACRO("test"), __FUNCTION__);
 

@@ -13,6 +13,8 @@
 #define A_PLUS_B_MACRO(a, b)    ({int ret; ret = (a) + (b); ret;})
 #define A_PLUS_B_MACRO2(a, b)    ({int ret; ret = add((a), (b)); ret;})
 
+//#define TEST_MCARO();
+
 int add (int a, int b) {
     return a+b;
 }
@@ -28,6 +30,10 @@ int main(void)
     printf("RETURN_MACRO2: %d\n", RETURN_MACRO2());
     printf("a + b = %d\n", A_PLUS_B_MACRO(a, b));
     printf("a + b = %d\n", A_PLUS_B_MACRO2(a, b));
+
+    int c = A_PLUS_B_MACRO(22, 32);
+
+    printf("%d\n", c);
     return 0;
 }
 

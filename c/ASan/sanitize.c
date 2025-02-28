@@ -15,7 +15,7 @@ char global_arr[9] = {0};
 
 int main(void) {
 
-    
+
     char local_arr[15] = {0};
     int i = 0;
 
