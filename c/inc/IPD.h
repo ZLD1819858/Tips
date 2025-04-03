@@ -118,6 +118,18 @@ typedef unsigned long       usize;
 #define container_of(ptr, type, member) \
     ((type *)((char *)(ptr) - (unsigned long)(&((type *)0)->member)))
 
+#define assert(expression) ((void)0)
+#if defined(N0DEBUG)
+#undef assert
+#define assert(expression) ((expression) ?  \
+                            (void)0 :       \
+                            assert_failed(__FILE__, __func__, __LINE__))
+
+void assert_failed(const char *file, const char *func, int line)
+{
+    printf("Assertion failed at %s(%s):%d", file, func, line);
+}
+
 
 /*
 static inline void * __cdecl memset(void *_Dst,int _Val, size_t _Size) {

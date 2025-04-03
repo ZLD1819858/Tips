@@ -34,6 +34,9 @@ struct Animal {
 #define CONCAT_FILE_MACRO(macro) macro " " __FILE__
 #define INFO_MACRO "This is a test:"
 
+#define ZHANG1 __COUNTER__
+#define ZHANG2 __COUNTER__
+
 int main (void)
 {
     printf_info("BuildInfo: %s\n", BuildInfo);
@@ -46,6 +49,8 @@ int main (void)
     } else {
         printf_warning("no, is b\n");
     }
+
+    printf_info("%d %d\n", ZHANG1, ZHANG2);
 
     return 0;
 }
