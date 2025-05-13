@@ -13,6 +13,12 @@ typedef enum
     EC_SERROR               = 0x25  // SError interrupt[24:0] 
 } ec_t;
 
+typedef enum
+{
+    IL_16BIT = 0,
+    IL_32BIT = 1 
+} il_t;
+
 typedef struct 
 {
    uint64_t ISS :25;    /* Instruction Specific Syndrome [24:0], depends on EC  */
